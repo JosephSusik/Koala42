@@ -1,0 +1,8 @@
+.header {
+    background-color: green;
+}
+
+.header:hover {
+    background-color: green;
+    cursor: auto;
+}

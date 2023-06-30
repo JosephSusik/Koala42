@@ -1,0 +1,16 @@
+.icon {
+    color: red;
+}
+
+.rotate {
+    transform: rotate(90deg);
+}
+  
+
+.dark {
+    background-color: grey;
+}
+
+.light {
+    background-color: lightgray;
+}

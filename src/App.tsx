@@ -1,24 +1,41 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from 'react';
+import data from './example-data.json'
+import RowContent from './components/RowContent';
+import Header from './components/Header';
+import { DataType } from './dataType';
+
+let dataInit:any[] = [];
+
+data.forEach(element => {
+    dataInit.push(element)
+});
 
 function App() {
+  const [data, setData] = useState<DataType>(dataInit);
+
+  const handleRemoveItem = (index:number, isChild:boolean) => {
+    if(!isChild) {
+      const tmp = [...data];
+      tmp.splice(index, 1);
+      setData(tmp);
+    }
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className='wrap'>
+      
+      <Header item={data[0].data}/>
+
+      {data.map((item:any, index:number) => (          
+        <RowContent 
+          item={item} 
+          handleDelete={handleRemoveItem} 
+          index={index} 
+          color={index}
+        />
+      ))}
+
+      
     </div>
   );
 }
