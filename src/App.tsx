@@ -13,12 +13,10 @@ data.forEach(element => {
 function App() {
   const [data, setData] = useState<DataType>(dataInit);
 
-  const handleRemoveItem = (index:number, isChild:boolean) => {
-    if(!isChild) {
-      const tmp = [...data];
-      tmp.splice(index, 1);
-      setData(tmp);
-    }
+  const handleRemoveItem = (index:number) => {
+    const tmp = [...data];
+    tmp.splice(index, 1);
+    setData(tmp);
   };
 
   return (

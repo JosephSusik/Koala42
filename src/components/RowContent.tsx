@@ -40,11 +40,15 @@ function RowContent(props:Row) {
                     </div>
                 ))}
 
-                
-                <DeleteIcon 
-                    className='icon'
-                    onClick={()=>props.handleDelete(props.index, props.child)}
-                />
+                {props.child? 
+                    <div></div>
+                :
+                    <DeleteIcon 
+                        className='icon'
+                        onClick={()=>props.handleDelete(props.index)}
+                    />
+                }
+               
             </div>
             
             {clicked &&
