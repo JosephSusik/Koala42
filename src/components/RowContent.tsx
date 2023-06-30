@@ -55,7 +55,7 @@ function RowContent(props:Row) {
             <>
                 {childData &&
                     <div>
-                        <Header item={childData}/>
+                        <Header item={childData} child={true}/>
 
                         {childRecords.map((item:any, index:number) => (
                                 <RowContent 

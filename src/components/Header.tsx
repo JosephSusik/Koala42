@@ -1,7 +1,8 @@
 import './styles/Header.css'
 
 interface headerInterface {
-  item: any
+  item: any,
+  child?: boolean
 }
 
 function Header(props:headerInterface) {
@@ -20,7 +21,12 @@ function Header(props:headerInterface) {
         <div className='flex header'>
             <div></div>
             {getHeader(props.item)}
-            <p>Delete?</p>
+            {props.child?
+              <div></div>
+            :
+              <p>Delete?</p>
+            }
+            
         </div>
     );
 }
