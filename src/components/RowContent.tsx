@@ -7,10 +7,13 @@ import Header from './Header';
 
 interface Row {
     item: any,
+    firstParentIndex: number,
     index: number,
-    color: number,
     handleDelete: Function,
-    child?: boolean
+    child?: boolean,
+    hasNemesis?: boolean
+    hasSecrete?: boolean
+    parentIndex?:number
 }
 
 function RowContent(props:Row) {
@@ -20,10 +23,13 @@ function RowContent(props:Row) {
     const childRecords = findVal(props.item.children, 'records');
     const currentData = Object.entries(props.item.data)
     
+    const hasNemesis = props.item.children.hasOwnProperty('has_nemesis');
+    const hasSecrete = props.item.children.hasOwnProperty('has_secrete');
+
     return(
         <div>
             <div 
-                className={`flex ${props.color%2 === 0? 'dark':'light'}`} 
+                className={`flex ${props.index%2 === 0? 'dark':'light'}`} 
                 onClick={()=>setClicked(!clicked)}
             >
                 {childData ?
@@ -40,14 +46,17 @@ function RowContent(props:Row) {
                     </div>
                 ))}
 
-                {props.child? 
-                    <div></div>
-                :
-                    <DeleteIcon 
-                        className='icon'
-                        onClick={()=>props.handleDelete(props.index)}
-                    />
-                }
+
+                <DeleteIcon 
+                    className='icon'
+                    onClick={()=>props.handleDelete(
+                        props.firstParentIndex,
+                        props.hasNemesis, 
+                        props.hasSecrete, 
+                        props.index, 
+                        props.parentIndex
+                    )}
+                />
                
             </div>
             
@@ -60,10 +69,13 @@ function RowContent(props:Row) {
                         {childRecords.map((item:any, index:number) => (
                                 <RowContent 
                                     item={item} 
-                                    handleDelete={props.handleDelete} 
-                                    index={props.index} 
-                                    color={index}
+                                    handleDelete={props.handleDelete}    
+                                    firstParentIndex={props.firstParentIndex} 
+                                    parentIndex={props.index}
+                                    index={index}                
                                     child={true}
+                                    hasNemesis={hasNemesis}
+                                    hasSecrete={hasSecrete}
                                 />
                         ))}
                     </div>

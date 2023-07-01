@@ -21,11 +21,7 @@ function Header(props:headerInterface) {
         <div className='flex header'>
             <div></div>
             {getHeader(props.item)}
-            {props.child?
-              <div></div>
-            :
-              <p>Delete?</p>
-            }
+            <p>Delete?</p>
             
         </div>
     );
